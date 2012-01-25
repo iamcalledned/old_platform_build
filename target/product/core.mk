@@ -24,6 +24,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES := \
     ApplicationsProvider \
+    StingrayQuickOffice \
     Superuser \
     su \
     BackupRestoreConfirmation \
@@ -38,7 +39,6 @@ PRODUCT_PACKAGES := \
     KeyChain \
     MediaProvider \
     PackageInstaller \
-    PicoTts \
     SettingsProvider \
     SharedStorageBackup \
     TelephonyProvider \
