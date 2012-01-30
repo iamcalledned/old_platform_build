@@ -27,7 +27,6 @@ PRODUCT_PACKAGES := \
     StingrayQuickOffice \
     Superuser \
     su \
-    BackupRestoreConfirmation \
     Browser \
     Contacts \
     ContactsProvider \
