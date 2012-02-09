@@ -24,9 +24,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES := \
     ApplicationsProvider \
+    Gallery2 \
     Calendar \
-    Superuser \
-    su \
     BackupRestoreConfirmation \
     Browser \
     Contacts \

@@ -24,9 +24,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES := \
     ApplicationsProvider \
-    StingrayQuickOffice \
-    Superuser \
-    su \
+    Calendar \
     BackupRestoreConfirmation \
     Browser \
     Contacts \
