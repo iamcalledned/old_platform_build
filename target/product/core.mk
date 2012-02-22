@@ -24,7 +24,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES := \
     ApplicationsProvider \
-    Gallery2 \
     Calendar \
     BackupRestoreConfirmation \
     Browser \
