@@ -24,16 +24,23 @@ PRODUCT_PACKAGES := \
 	Email \
 	Exchange \
 	Gallery \
-	Mms \
 	Music \
+	Mms \
+	OpenWnn \
+	libWnnEngDic \
+	libWnnJpnDic \
+	libwnndict \
 	Phone \
+	PinyinIME \
 	Protips \
+	SoftKeyboard \
 	SystemUI \
 	Launcher2 \
 	Development \
 	DrmProvider \
 	Fallback \
 	Settings \
+	SdkSetup \
 	CustomLocale \
 	sqlite3 \
 	LatinIME \
@@ -41,6 +48,8 @@ PRODUCT_PACKAGES := \
 	LiveWallpapersPicker \
 	ApiDemos \
 	GestureBuilder \
+	CubeLiveWallpapers \
+	QuickSearchBox \
 	WidgetPreview \
 	monkeyrunner \
 	guavalib \
@@ -79,6 +88,7 @@ PRODUCT_PACKAGES += \
 # See development/build/sdk.atree
 PRODUCT_PACKAGES += \
 	androidprefs \
+	annotations \
 	sdkstats \
 	archquery \
 	ddms \
@@ -129,6 +139,8 @@ PRODUCT_COPY_FILES := \
 	system/core/rootdir/etc/vold.fstab:system/etc/vold.fstab \
 	frameworks/base/data/sounds/effects/camera_click.ogg:system/media/audio/ui/camera_click.ogg \
 	frameworks/base/data/sounds/effects/VideoRecord.ogg:system/media/audio/ui/VideoRecord.ogg \
+	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml
 
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)

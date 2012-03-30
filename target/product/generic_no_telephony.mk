@@ -21,7 +21,6 @@ PRODUCT_POLICY := android.policy_phone
 
 PRODUCT_PACKAGES := \
     DeskClock \
-    AlarmProvider \
     Bluetooth \
     Calculator \
     Calendar \
@@ -32,8 +31,11 @@ PRODUCT_PACKAGES := \
     Gallery2 \
     LatinIME \
     Launcher2 \
+    Music \
     MusicFX \
+    Provision \
     Phone \
+    QuickSearchBox \
     Settings \
     Sync \
     SystemUI \

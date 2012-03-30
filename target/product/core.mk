@@ -24,8 +24,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES := \
     ApplicationsProvider \
-    SpareParts \
-    Calendar \
     BackupRestoreConfirmation \
     Browser \
     Contacts \
@@ -38,6 +36,7 @@ PRODUCT_PACKAGES := \
     KeyChain \
     MediaProvider \
     PackageInstaller \
+    PicoTts \
     SettingsProvider \
     SharedStorageBackup \
     TelephonyProvider \

@@ -37,14 +37,19 @@ endif
 #TOPDIR := $(TOP)/
 #endif
 
-# check for broken versions of make
+# Check for broken versions of make.
+# (Allow any version under Cygwin since we don't actually build the platform there.)
+ifeq (,$(findstring CYGWIN,$(shell uname -sm)))
 ifeq (0,$(shell expr $$(echo $(MAKE_VERSION) | sed "s/[^0-9\.].*//") = 3.81))
+ifeq (0,$(shell expr $$(echo $(MAKE_VERSION) | sed "s/[^0-9\.].*//") = 3.82))
 $(warning ********************************************************************************)
 $(warning *  You are using version $(MAKE_VERSION) of make.)
-$(warning *  Android can only be built by version 3.81.)
+$(warning *  Android can only be built by versions 3.81 and 3.82.)
 $(warning *  see http://source.android.com/source/download.html)
 $(warning ********************************************************************************)
 $(error stopping)
+endif
+endif
 endif
 
 TOP := .
@@ -131,7 +136,7 @@ $(info ************************************************************)
 $(error stop)
 endif
 
-# Check for the correct version of javac #
+# Check for the correct version of javac
 javac_version := $(shell javac -version 2>&1 | head -n 1 | grep '[ "]1\.6[\. "$$]')
 ifeq ($(strip $(javac_version)),)
 $(info ************************************************************)
@@ -388,74 +393,8 @@ SDK_ONLY := true
 endif
 
 ifeq ($(SDK_ONLY),true)
-
-# ----- SDK for Windows ------
-# These configure the build targets that are available for the SDK under Windows.
-# The first section defines all the C/C++ tools that can be compiled in C/C++,
-# the second section defines all the Java ones (assuming javac is available.)
-
-subdirs := \
-	prebuilt \
-	build/libs/host \
-	build/tools/zipalign \
-	dalvik/dexdump \
-	dalvik/libdex \
-	dalvik/tools/dmtracedump \
-	dalvik/tools/hprof-conv \
-	development/host \
-	development/tools/etc1tool \
-	development/tools/line_endings \
-	development/tools/emulator/opengl \
-	external/clang \
-	external/easymock \
-	external/expat \
-	external/libpng \
-	external/llvm \
-	external/qemu \
-	external/sqlite/dist \
-	external/zlib \
-	frameworks/base \
-	frameworks/compile \
-	sdk/avdlauncher \
-	sdk/emulator/mksdcard \
-	sdk/sdklauncher \
-	system/core/adb \
-	system/core/fastboot \
-	system/core/libcutils \
-	system/core/liblog \
-	system/core/libzipfile
-
-# The following can only be built if "javac" is available.
-# This check is used when building parts of the SDK under Cygwin.
-ifneq (,$(shell which javac 2>/dev/null))
-subdirs += \
-	build/tools/signapk \
-	dalvik/dx \
-	libcore \
-	sdk/archquery \
-	sdk/androidprefs \
-	sdk/apkbuilder \
-	sdk/assetstudio \
-	sdk/common \
-	sdk/ddms \
-	sdk/hierarchyviewer2 \
-	sdk/ide_common \
-	sdk/jarutils \
-	sdk/layoutlib_api \
-	sdk/layoutopt \
-	sdk/ninepatch \
-	sdk/rule_api \
-	sdk/lint \
-	sdk/sdkstats \
-	sdk/sdkmanager \
-	sdk/swtmenubar \
-	sdk/traceview \
-	development/apps \
-	development/tools/mkstubs \
-	packages
-else
-$(warning SDK_ONLY: javac not available.)
-endif
+include $(TOPDIR)sdk/build/sdk_only_whitelist.mk
+include $(TOPDIR)development/build/sdk_only_whitelist.mk
 
 # Exclude tools/acp when cross-compiling windows under linux
 ifeq ($(findstring Linux,$(UNAME)),)

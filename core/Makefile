@@ -16,10 +16,16 @@ endif
 # e.g., "system/etc/file.xml".
 # The filter part means "only eval the copy-one-file rule if this
 # src:dest pair is the first one to match the same dest"
+#$(1): the src:dest pair
+define check-product-copy-files
+$(if $(filter %.apk, $(1)),$(error \
+    Prebuilt apk found in PRODUCT_COPY_FILES: $(1), use BUILD_PREBUILT instead!))
+endef
 unique_product_copy_files_destinations :=
 $(foreach cf,$(PRODUCT_COPY_FILES), \
     $(eval _src := $(call word-colon,1,$(cf))) \
     $(eval _dest := $(call word-colon,2,$(cf))) \
+    $(call check-product-copy-files,$(cf)) \
     $(if $(filter $(unique_product_copy_files_destinations),$(_dest)),, \
         $(eval _fulldest := $(call append-path,$(PRODUCT_OUT),$(_dest))) \
         $(eval $(call copy-one-file,$(_src),$(_fulldest))) \
@@ -824,6 +830,12 @@ systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
 	$(call build-systemimage-target,$(INSTALLED_SYSTEMIMAGE))
 	$(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMIMAGE),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE),yaffs)
 
+ifneq (,$(filter systemimage-nodeps snod, $(MAKECMDGOALS)))
+ifeq (true,$(WITH_DEXPREOPT))
+$(warning Warning: with dexpreopt enabled, you may need a full rebuild.)
+endif
+endif
+
 #######
 ## system tarball
 define build-systemtarball-target
@@ -1429,6 +1441,7 @@ $(INTERNAL_SDK_TARGET): $(deps)
 			-I $(TARGET_COMMON_OUT_ROOT) \
 			-v "PLATFORM_NAME=android-$(PLATFORM_VERSION)" \
 			-v "OUT_DIR=$(OUT_DIR)" \
+			-v "HOST_OUT=$(HOST_OUT)" \
 			-v "TARGET_ARCH=$(TARGET_ARCH)" \
 			-v "TARGET_CPU_ABI=$(TARGET_CPU_ABI)" \
 			-v "DLL_EXTENSION=$(HOST_SHLIB_SUFFIX)" \
