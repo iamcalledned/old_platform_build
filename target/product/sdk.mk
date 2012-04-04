@@ -23,7 +23,6 @@ PRODUCT_PACKAGES := \
 	DeskClock \
 	Email \
 	Exchange \
-	Gallery \
 	Music \
 	Mms \
 	OpenWnn \
@@ -58,10 +57,9 @@ PRODUCT_PACKAGES := \
 	jsilver \
 	librs_jni \
 	ConnectivityTest \
-	GpsLocationTest \
-	CalendarProvider \
-	Calendar
-
+	GpsLocationTest 
+	
+	
 
 # Host tools that are parts of the SDK.
 # See development/build/sdk.atree
